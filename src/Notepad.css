@@ -1,0 +1,46 @@
+/* src/Notepad.css */
+.notepad {
+  width: 80%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #f9f9f9;
+}
+
+textarea {
+  width: 100%;
+  height: 500px; /* Increase the height */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.notepad-footer {
+  margin-top: 10px;
+  text-align: right;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Adjust title size */
+.App-header h1 {
+  font-size: 48px; /* Make the title smaller */
+  margin-bottom: 20px;
+}
+
