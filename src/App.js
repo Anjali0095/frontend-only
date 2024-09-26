@@ -26,7 +26,7 @@ function App() {
         <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
             <header className="App-header">
                 <h1>React Notepad</h1>
-                This is your notepad app. Welcome!
+                 <marquee>This is your notepad app. Welcome!</marquee>
                 {isLoggedIn ? (
                     <>
                         <button onClick={toggleDarkMode}>
