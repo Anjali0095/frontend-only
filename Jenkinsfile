@@ -6,7 +6,7 @@ pipeline {
         DEPLOY_USER = 'ubuntu'
         DEPLOY_HOST = '35.154.215.130'
         DEPLOY_PATH = '/home/ubuntu/frontend-only'
-        SSH_KEY     = credentials 'Jenkins'
+        SSH_KEY     = (credentialsId)'Jenkins'
     }
 
     stages {
