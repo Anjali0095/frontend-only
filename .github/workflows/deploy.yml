@@ -24,11 +24,19 @@ jobs:
       - name: Add SSH key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          AWS_EC2_HOST: ${{ secrets.AWS_EC2_HOST }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H ${{ secrets.AWS_EC2_HOST }} >> ~/.ssh/known_hosts
+          
+          # Check if AWS_EC2_HOST is set and not empty
+          if [ -z "$AWS_EC2_HOST" ]; then
+            echo "AWS_EC2_HOST is empty or not set"
+            exit 1
+          fi
+          
+          ssh-keyscan -H $AWS_EC2_HOST >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         env:
@@ -47,14 +55,16 @@ jobs:
           sudo chmod -R u+rwX /home/ubuntu/frontend-only || exit
 
           # Configure Git to handle permissions issues
-          git config --global --add safe.directory /home/ubuntu/frontend-only || exit
+          git config --global --add safe.directory /home/ubuntu/frontend-only|| exit
 
           # Pull the latest code
-          git pull origin main || exit
+          git pull origin master || exit
 
           # Install dependencies and build the project
           npm install || exit
           npm run build || exit
+
+          # Restart the application using PM2
           pm2 delete react
           pm2 start npm --name "react" -- start
           pm2 restart react
