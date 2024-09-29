@@ -23,7 +23,7 @@ jobs:
 
       - name: Add SSH key
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.AWS_SSH_PRIVATE_PUB_KEY }}
           AWS_EC2_HOST: ${{ secrets.AWS_EC2_HOST }}
         run: |
           mkdir -p ~/.ssh
