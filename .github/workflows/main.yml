@@ -37,17 +37,17 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy_key $AWS_EC2_USER@$AWS_EC2_HOST << 'EOF'
           # Ensure the deployment directory exists
-          mkdir -p /home/ubuntu/frontend-code || exit
+          mkdir -p /home/ubuntu/frontend-only || exit
           
           # Change to the deployment directory
-          cd /home/ubuntu/frontend-code || exit
+          cd /home/ubuntu/frontend-only || exit
 
           # Fix ownership and permissions
-          sudo chown -R $AWS_EC2_USER:$AWS_EC2_USER /home/ubuntu/frontend-code || exit
-          sudo chmod -R u+rwX /home/ubuntu/frontend-code || exit
+          sudo chown -R $AWS_EC2_USER:$AWS_EC2_USER /home/ubuntu/frontend-only || exit
+          sudo chmod -R u+rwX /home/ubuntu/frontend-only || exit
 
           # Configure Git to handle permissions issues
-          git config --global --add safe.directory /home/ubuntu/frontend-code || exit
+          git config --global --add safe.directory /home/ubuntu/frontend-only || exit
 
           # Pull the latest code
           git pull origin main || exit
